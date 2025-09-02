@@ -87,16 +87,17 @@ const EndlessLove: React.FC = () => {
     // The Climax Message - now dynamic and part of the 3D scene
     const climaxMessage = (
         <div 
-            className="fly-in-climax-element text-white text-3xl sm:text-4xl md:text-6xl font-dancing tracking-wider neon-text animate-pulse-glow whitespace-nowrap"
+            className="fly-in-climax-element"
             style={{
                 top: '50%',
                 left: '50%',
-                transform: 'translateX(-50%) translateY(-50%)',
                 animationDuration: '25s',
                 animationDelay: '5s', 
             }}
         >
-            Kaulah semestaku, Uswa.
+            <div className="text-white text-3xl sm:text-4xl md:text-6xl font-dancing tracking-wider neon-text animate-pulse-glow whitespace-nowrap">
+                Kaulah semestaku, Uswa.
+            </div>
         </div>
     );
 
@@ -108,4 +109,4 @@ const EndlessLove: React.FC = () => {
     );
 };
 
-export default EndlessLove;
+export default React.memo(EndlessLove);

@@ -1,6 +1,7 @@
 
 import React, { useState, useRef } from 'react';
 import EndlessLove from './components/MessageCard';
+import FallingHearts from './components/FallingHearts';
 
 const HeartIcon: React.FC = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" viewBox="0 0 24 24" fill="currentColor">
@@ -25,9 +26,9 @@ type IntroState = 'visible' | 'hidden';
 const App: React.FC = () => {
   const [introState, setIntroState] = useState<IntroState>('visible');
   const [isPlaying, setIsPlaying] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const audioRef = useRef<HTMLAudioElement>(null);
   const mainRef = useRef<HTMLElement>(null);
+  const perspectiveContainerRef = useRef<HTMLDivElement>(null);
 
   const handleOpenMessage = () => {
     if (introState !== 'visible') return;
@@ -62,19 +63,16 @@ const App: React.FC = () => {
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    if (introState !== 'hidden' || !mainRef.current) return;
+    if (introState !== 'hidden' || !mainRef.current || !perspectiveContainerRef.current) return;
     
     const { clientX, clientY } = e;
     const { offsetWidth, offsetHeight } = mainRef.current;
     const x = (clientX / offsetWidth - 0.5) * 2; // -1 to 1
     const y = (clientY / offsetHeight - 0.5) * 2; // -1 to 1
-    setMousePos({ x, y });
-  };
 
-  const perspectiveStyle: React.CSSProperties = {
-    transform: `rotateY(${mousePos.x * 4}deg) rotateX(${-mousePos.y * 4}deg)`,
+    // Direct DOM manipulation for performance, avoiding React re-renders.
+    perspectiveContainerRef.current.style.transform = `rotateY(${x * 4}deg) rotateX(${-y * 4}deg)`;
   };
-
 
   return (
     <main 
@@ -104,9 +102,10 @@ const App: React.FC = () => {
       
       {/* Galaxy Screen Wrapper */}
       <div className={`absolute inset-0 transition-opacity duration-[1500ms] ease-in-out ${introState === 'hidden' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <FallingHearts />
         <div 
+            ref={perspectiveContainerRef}
             className="absolute inset-0 perspective-container overflow-hidden"
-            style={perspectiveStyle}
           >
             <EndlessLove />
         </div>

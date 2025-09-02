@@ -2,7 +2,7 @@
 import React from 'react';
 import Heart from './Heart';
 
-const HEART_COUNT = 50;
+const HEART_COUNT = 25;
 
 const FallingHearts: React.FC = () => {
   const hearts = Array.from({ length: HEART_COUNT }).map((_, i) => {
