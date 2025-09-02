@@ -33,7 +33,7 @@
           radial-gradient(1px 1px at 130px 80px, #fff, rgba(0,0,0,0)),
           radial-gradient(1px 1px at 160px 120px, #ddd, rgba(0,0,0,0));
         background-repeat: repeat;
-        background-size: 200px 200px;
+        background-size: 250px 250px;
         animation: move-stars 200s linear infinite;
       }
 
@@ -202,6 +202,37 @@
         animation-name: shimmer;
         animation-timing-function: linear;
         animation-iteration-count: infinite;
+      }
+
+      @keyframes fade-in-up {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-fade-in-up {
+        animation: fade-in-up 1s ease-out forwards;
+        opacity: 0;
+      }
+      
+      .galaxy-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 1rem;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.875rem;
+        letter-spacing: 0.1em;
+        text-shadow: 0 0 5px rgba(255,255,255,0.2);
+        z-index: 10;
+        pointer-events: none;
       }
     </style>
   <script type="importmap">
