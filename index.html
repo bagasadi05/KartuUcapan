@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Untuk Uswa Tersayang</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #02010a;
+      }
+      
+      .font-dancing {
+        font-family: 'Dancing Script', cursive;
+      }
+
+      @keyframes move-stars {
+        from { background-position: 0 0; }
+        to { background-position: -10000px 5000px; }
+      }
+
+      .star-bg {
+        background:
+          radial-gradient(1px 1px at 20px 30px, #eee, rgba(0,0,0,0)),
+          radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
+          radial-gradient(1px 1px at 50px 160px, #ddd, rgba(0,0,0,0)),
+          radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
+          radial-gradient(1px 1px at 130px 80px, #fff, rgba(0,0,0,0)),
+          radial-gradient(1px 1px at 160px 120px, #ddd, rgba(0,0,0,0));
+        background-repeat: repeat;
+        background-size: 200px 200px;
+        animation: move-stars 200s linear infinite;
+      }
+
+      @keyframes pulse-heart {
+        0%, 100% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(244, 114, 182, 0.4);
+        }
+        50% {
+          transform: scale(1.05);
+          box-shadow: 0 0 20px 10px rgba(244, 114, 182, 0);
+        }
+      }
+      .animate-pulse-heart {
+        animation: pulse-heart 2s infinite;
+      }
+      
+      /* 3D Scene Styles */
+      .perspective-container {
+        perspective: 250px;
+        transform-style: preserve-3d;
+        transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+
+      @keyframes fly-in {
+        0% {
+          transform: translateZ(-500px) rotateX(30deg);
+          opacity: 0;
+        }
+        15% {
+          opacity: 1;
+        }
+        85% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateZ(100px) rotateX(30deg);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fly-in-pulse {
+        0% {
+          transform: translateZ(-500px) rotateX(30deg) scale(1);
+          opacity: 0;
+        }
+        15% { opacity: 1; }
+        30% { transform: translateZ(-320px) rotateX(30deg) scale(1.15); }
+        45% { transform: translateZ(-230px) rotateX(30deg) scale(1); }
+        60% { transform: translateZ(-140px) rotateX(30deg) scale(1.15); }
+        75% { transform: translateZ(-50px) rotateX(30deg) scale(1); }
+        85% { opacity: 1; }
+        100% {
+          transform: translateZ(100px) rotateX(30deg) scale(1);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fly-in-climax {
+        0% {
+          transform: translateZ(-800px) rotateX(15deg);
+          opacity: 0;
+        }
+        20% {
+          opacity: 1;
+        }
+        30% {
+          transform: translateZ(-150px) rotateX(0deg);
+        }
+        70% {
+          transform: translateZ(-150px) rotateX(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateZ(200px) rotateX(-15deg);
+          opacity: 0;
+        }
+      }
+
+      .fly-in-element {
+        position: absolute;
+        transform-style: preserve-3d;
+        animation-name: fly-in;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        backface-visibility: hidden;
+      }
+      
+      .fly-in-heart-element {
+        position: absolute;
+        transform-style: preserve-3d;
+        animation-name: fly-in-pulse;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        backface-visibility: hidden;
+      }
+      
+      .fly-in-climax-element {
+        position: absolute;
+        transform-style: preserve-3d;
+        animation-name: fly-in-climax;
+        animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+        animation-iteration-count: infinite;
+        backface-visibility: hidden;
+      }
+      
+      @keyframes fall {
+        0% {
+          transform: translateY(-10vh) translateX(var(--tx-start, 0)) rotate(0);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(110vh) translateX(var(--tx-end, 0)) rotate(var(--rotate-end, 360deg));
+          opacity: 0;
+        }
+      }
+      
+      .animate-fall {
+        animation: fall linear forwards;
+      }
+
+      .neon-text {
+        color: #fff;
+        text-shadow:
+          0 0 4px #fff,
+          0 0 10px #f472b6,
+          0 0 20px #f472b6,
+          0 0 40px #f472b6,
+          0 0 60px #f472b6;
+      }
+
+      @keyframes pulse-glow {
+        0%, 100% {
+          text-shadow:
+            0 0 5px #fff,
+            0 0 12px #f472b6,
+            0 0 25px #f472b6,
+            0 0 50px #f472b6;
+        }
+        50% {
+          text-shadow:
+            0 0 10px #fff,
+            0 0 20px #f9a8d4,
+            0 0 40px #f9a8d4,
+            0 0 80px #f9a8d4;
+        }
+      }
+
+      .animate-pulse-glow {
+        animation: pulse-glow 3s infinite ease-in-out;
+      }
+      
+      @keyframes shimmer {
+        0% { background-position: 200% center; }
+        100% { background-position: -200% center; }
+      }
+      .shimmering-text {
+        background-image: linear-gradient(
+          90deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.8) 50%,
+          transparent 70%
+        );
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation-name: shimmer;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
