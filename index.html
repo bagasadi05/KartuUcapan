@@ -24,6 +24,19 @@
         to { background-position: -10000px 5000px; }
       }
 
+      @keyframes deep-space-pulse {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 0.5; }
+      }
+
+      .nebula-bg {
+        background:
+          radial-gradient(ellipse at 20% 80%, rgba(217, 70, 239, 0.2) 0%, transparent 70%),
+          radial-gradient(ellipse at 80% 30%, rgba(244, 114, 182, 0.2) 0%, transparent 70%),
+          radial-gradient(ellipse at 50% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+        animation: deep-space-pulse 15s infinite ease-in-out;
+      }
+
       .star-bg {
         background:
           radial-gradient(1px 1px at 20px 30px, #eee, rgba(0,0,0,0)),
@@ -60,55 +73,60 @@
 
       @keyframes fly-in {
         0% {
-          transform: translateZ(-500px) rotateX(30deg);
+          transform: translateZ(-400px) scale(0.5);
           opacity: 0;
         }
         15% {
           opacity: 1;
         }
-        85% {
+        90% {
+          transform: translateZ(50px) scale(1.2);
           opacity: 1;
         }
         100% {
-          transform: translateZ(100px) rotateX(30deg);
+          transform: translateZ(60px) scale(1.25);
           opacity: 0;
         }
       }
       
       @keyframes fly-in-pulse {
         0% {
-          transform: translateZ(-500px) rotateX(30deg) scale(1);
+          transform: translateZ(-400px) scale(0.5);
           opacity: 0;
         }
         15% { opacity: 1; }
-        30% { transform: translateZ(-320px) rotateX(30deg) scale(1.15); }
-        45% { transform: translateZ(-230px) rotateX(30deg) scale(1); }
-        60% { transform: translateZ(-140px) rotateX(30deg) scale(1.15); }
-        75% { transform: translateZ(-50px) rotateX(30deg) scale(1); }
-        85% { opacity: 1; }
+        30% { transform: translateZ(-280px) scale(0.85); }
+        45% { transform: translateZ(-200px) scale(0.75); }
+        60% { transform: translateZ(-100px) scale(0.95); }
+        75% { transform: translateZ(0px) scale(0.8); }
+        90% {
+          transform: translateZ(50px) scale(1.2);
+          opacity: 1;
+        }
         100% {
-          transform: translateZ(100px) rotateX(30deg) scale(1);
+          transform: translateZ(60px) scale(1.25);
           opacity: 0;
         }
       }
       
       @keyframes fly-in-climax {
         0% {
-          transform: translateX(-50%) translateY(-50%) translateZ(-800px) rotateX(15deg);
+          transform: translateX(-50%) translateY(-50%) translateZ(-800px) scale(0.3);
           opacity: 0;
         }
         20% {
           opacity: 1;
         }
-        30% {
-          transform: translateX(-50%) translateY(-50%) translateZ(-150px) rotateX(0deg);
+        40% {
+          transform: translateX(-50%) translateY(-50%) translateZ(0px) scale(1);
+          opacity: 1;
         }
-        70% {
-          transform: translateX(-50%) translateY(-50%) translateZ(-150px) rotateX(0deg);
+        85% {
+          transform: translateX(-50%) translateY(-50%) translateZ(0px) scale(1.02);
           opacity: 1;
         }
         100% {
-          transform: translateX(-50%) translateY(-50%) translateZ(200px) rotateX(-15deg);
+          transform: translateX(-50%) translateY(-50%) translateZ(25px) scale(1.05);
           opacity: 0;
         }
       }
@@ -233,6 +251,28 @@
         text-shadow: 0 0 5px rgba(255,255,255,0.2);
         z-index: 10;
         pointer-events: none;
+      }
+      
+      @keyframes shoot {
+        0% {
+          transform: translateX(0) translateY(0);
+          opacity: 1;
+        }
+        100% {
+          transform: translateX(var(--end-x, 100vw)) translateY(var(--end-y, 100vh));
+          opacity: 0;
+        }
+      }
+      
+      .shooting-star {
+        position: absolute;
+        width: 3px;
+        height: 60px;
+        background: linear-gradient(to top, rgba(255, 255, 255, 0.7), transparent);
+        border-radius: 50%;
+        filter: drop-shadow(0 0 6px #fff);
+        animation: shoot ease-in forwards;
+        will-change: transform, opacity;
       }
     </style>
   <script type="importmap">

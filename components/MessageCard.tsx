@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-const ITEM_COUNT = 20; 
+const ITEM_COUNT = 25; 
 const MESSAGES = [
     "Hai, Uswa...",
     "Di galaksi yang luas ini...",
@@ -43,7 +43,7 @@ const EndlessLove: React.FC = () => {
         
         return Array.from({ length: ITEM_COUNT }).map((_, i) => {
             const position = positions[i];
-            const isText = Math.random() > 0.35;
+            const itemType = Math.random();
             const style: React.CSSProperties = {
                 top: `${position.top}%`,
                 left: `${position.left}%`,
@@ -52,7 +52,7 @@ const EndlessLove: React.FC = () => {
                 transformOrigin: 'center'
             };
 
-            if (isText) {
+            if (itemType > 0.6) { // 40% chance for text
                 const randomMessage = MESSAGES[Math.floor(Math.random() * MESSAGES.length)];
                 style.transform = `rotateY(${Math.random() * 20 - 10}deg)`;
 
@@ -70,7 +70,7 @@ const EndlessLove: React.FC = () => {
                         </span>
                     </div>
                 );
-            } else {
+            } else if (itemType > 0.2) { // 40% chance for heart
                 const heartColor = HEART_COLORS[Math.floor(Math.random() * HEART_COLORS.length)];
                 return (
                     <div key={`heart-${i}`} className={`fly-in-heart-element ${heartColor}`} style={{...style, fontSize: `${Math.random() * 20 + 20}px`}}>
@@ -78,6 +78,19 @@ const EndlessLove: React.FC = () => {
                              style={{ filter: 'drop-shadow(0 0 5px #f00) drop-shadow(0 0 15px #f00)' }}>
                             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                         </svg>
+                    </div>
+                );
+            } else { // 20% chance for stardust
+                const size = Math.random() * 10 + 5;
+                return (
+                    <div key={`stardust-${i}`} className="fly-in-heart-element" style={{ ...style }}>
+                       <div className="rounded-full bg-white" style={{
+                           width: `${size}px`,
+                           height: `${size}px`,
+                           filter: 'blur(3px) brightness(1.5)',
+                           boxShadow: '0 0 8px 2px #fff, 0 0 12px 4px #f0abfc, 0 0 20px 6px #a855f7',
+                           opacity: Math.random() * 0.5 + 0.5,
+                       }}></div>
                     </div>
                 );
             }
