@@ -2,7 +2,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import EndlessLove from './components/MessageCard';
 import FallingHearts from './components/FallingHearts';
-import ShootingStars from './components/ShootingStars';
 
 const HeartIcon: React.FC = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" viewBox="0 0 24 24" fill="currentColor">
@@ -159,7 +158,7 @@ const App: React.FC = () => {
     // Outro transition timer
     const outroTimer = setTimeout(() => {
       setSceneState('outro');
-    }, 45000); // 45 seconds until outro
+    }, 55000); // 55 seconds until outro
 
     return () => {
       clearTimeout(outroTimer);
@@ -206,7 +205,6 @@ const App: React.FC = () => {
       {/* Galaxy Scene */}
       <div className={`absolute inset-0 transition-opacity duration-[1500ms] ease-in-out ${sceneState === 'galaxy' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
         <div className="galaxy-header">Pesan Cinta untuk Uswa</div>
-        <ShootingStars />
         <FallingHearts />
         <div 
             ref={perspectiveContainerRef}

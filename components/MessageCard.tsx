@@ -104,7 +104,7 @@ const EndlessLove: React.FC = () => {
             style={{
                 top: '50%',
                 left: '50%',
-                animationDuration: '25s',
+                animationDuration: '50s',
                 animationDelay: '5s', 
             }}
         >
