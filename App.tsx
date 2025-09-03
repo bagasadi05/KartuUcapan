@@ -29,6 +29,8 @@ const ReplayIcon: React.FC = () => (
 
 type SceneState = 'intro' | 'galaxy' | 'outro';
 
+const SUPABASE_AUDIO_URL = "https://fddvcyqbfqydvsfujcxd.supabase.co/storage/v1/object/public/music/audio.mp3";
+
 const App: React.FC = () => {
   const [sceneState, setSceneState] = useState<SceneState>('intro');
   const [isPlaying, setIsPlaying] = useState(false);
@@ -36,29 +38,42 @@ const App: React.FC = () => {
   const mainRef = useRef<HTMLElement>(null);
   const perspectiveContainerRef = useRef<HTMLDivElement>(null);
   const starBgRef = useRef<HTMLDivElement>(null);
-  // FIX: Changed NodeJS.Timeout to number as setTimeout in the browser returns a number.
   const inactivityTimer = useRef<number | null>(null);
+  const fadeRAF = useRef<number | null>(null);
+
+  useEffect(() => {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'audio';
+    link.href = SUPABASE_AUDIO_URL;
+    document.head.appendChild(link);
+    return () => {
+      document.head.removeChild(link);
+    };
+  }, []);
 
   const fadeAudio = useCallback((direction: 'in' | 'out', duration: number = 1000) => {
-    const audio = audioRef.current;
-    if (!audio) return;
+    if (!audioRef.current) return;
+    if (fadeRAF.current) cancelAnimationFrame(fadeRAF.current);
 
+    const startTime = performance.now();
+    const startVolume = audioRef.current.volume;
     const targetVolume = direction === 'in' ? 1 : 0.2;
-    const startVolume = audio.volume;
-    const stepTime = 50;
-    const steps = duration / stepTime;
-    const volumeStep = (targetVolume - startVolume) / steps;
 
-    let currentStep = 0;
-    const fade = setInterval(() => {
-        currentStep++;
-        if (currentStep > steps) {
-            clearInterval(fade);
-            audio.volume = targetVolume;
-        } else {
-            audio.volume = Math.max(0, Math.min(1, startVolume + volumeStep * currentStep));
+    const animate = (currentTime: number) => {
+        const elapsedTime = currentTime - startTime;
+        const progress = Math.min(1, elapsedTime / duration);
+        
+        if(audioRef.current) {
+            audioRef.current.volume = startVolume + (targetVolume - startVolume) * progress;
         }
-    }, stepTime);
+
+        if (progress < 1) {
+            fadeRAF.current = requestAnimationFrame(animate);
+        }
+    };
+
+    fadeRAF.current = requestAnimationFrame(animate);
   }, []);
   
   const resetInactivityTimer = useCallback(() => {
@@ -71,35 +86,38 @@ const App: React.FC = () => {
 
   const handleOpenMessage = () => {
     if (sceneState !== 'intro') return;
-
+    // User gesture is required to play audio
+    audioRef.current?.play().catch(console.error);
     setSceneState('galaxy');
-    
-    if (audioRef.current) {
-        audioRef.current.volume = 0;
-        audioRef.current.play().catch(error => console.error("Audio autoplay failed:", error));
-        fadeAudio('in', 2000);
-    }
-    setIsPlaying(true);
-    resetInactivityTimer();
   };
   
+  useEffect(() => {
+    // Start music and fade in when galaxy scene starts
+    if (sceneState === 'galaxy') {
+      if (audioRef.current) {
+        audioRef.current.volume = 0; // Set initial volume
+        fadeAudio('in', 2000);
+      }
+      resetInactivityTimer();
+    }
+  }, [sceneState, fadeAudio, resetInactivityTimer]);
+
   const handleReplay = () => {
     setSceneState('intro');
     if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
     }
-    setIsPlaying(false);
   }
 
   const togglePlayPause = () => {
-    if (!audioRef.current) return;
-    if (isPlaying) {
-      audioRef.current.pause();
+    const audioEl = audioRef.current;
+    if (!audioEl) return;
+    if (audioEl.paused) {
+      audioEl.play().catch(console.error);
     } else {
-      audioRef.current.play();
+      audioEl.pause();
     }
-    setIsPlaying(!isPlaying);
   };
   
   useEffect(() => {
@@ -248,9 +266,16 @@ const App: React.FC = () => {
           </div>
       </div>
 
-      <audio ref={audioRef} src="https://d2n7fc0kw20ri7.cloudfront.net/3ezny%2Ffile%2F2f3f9f1d8ddc931c06a1cd2990b83b6f_328e37955982737ec1f82026766c53b6.mp3?response-content-disposition=inline%3Bfilename%3D%222f3f9f1d8ddc931c06a1cd2990b83b6f_328e37955982737ec1f82026766c53b6.mp3%22%3B&response-content-type=audio%2Fmpeg&Expires=1756837741&Signature=NxWe-O-I9NWZ5DY0VLIgMqOq95Bbg4lnajIYrvnXJdZOGq0pvgt0iF6bdg05BAVKHiGiJgV9ZunGNAjr9BPc0IPbQhKCOR3ckHwi96Hh8IvzRgHdlPYBn0e5luOFbXBulFX1tbQ84itJVVxs4ILanpxBOfESq4qxFO5s3Pwk7OY87gwcD69jH8Js4wZ7FZlyKQxrY5TgoD3MMCOze~OwVc8wqPwaP57jsjAOXHwEvD09CBanZ-ey6zVP1ihhWpB70gqBX5rMYtSotCiugVkQbIFbXMLVOokQrbN6PBDFJSncC8a4MDlrEO6Tuh3aQzJxuMK7GfUAW52wmd-nGjbJjg__&Key-Pair-Id=APKAJT5WQLLEOADKLHBQ" loop onPlay={() => setIsPlaying(true)} onPause={() => setIsPlaying(false)}>
-        Browser Anda tidak mendukung elemen audio.
-      </audio>
+      <audio
+        ref={audioRef}
+        src={SUPABASE_AUDIO_URL}
+        preload="auto"
+        playsInline
+        loop
+        crossOrigin="anonymous"
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+      />
     </main>
   );
 };
