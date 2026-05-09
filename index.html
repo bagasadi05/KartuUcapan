@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Untuk Uswa Tersayang</title>
+    <title>Selamat Ulang Tahun Maya Amanda ke-23</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,9 +31,9 @@
 
       .nebula-bg {
         background:
-          radial-gradient(ellipse at 20% 80%, rgba(217, 70, 239, 0.2) 0%, transparent 70%),
-          radial-gradient(ellipse at 80% 30%, rgba(244, 114, 182, 0.2) 0%, transparent 70%),
-          radial-gradient(ellipse at 50% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+          radial-gradient(ellipse at 20% 80%, rgba(251, 191, 36, 0.18) 0%, transparent 70%),
+          radial-gradient(ellipse at 80% 30%, rgba(56, 189, 248, 0.18) 0%, transparent 70%),
+          radial-gradient(ellipse at 50% 50%, rgba(167, 139, 250, 0.15) 0%, transparent 70%);
         animation: deep-space-pulse 15s infinite ease-in-out;
       }
 
@@ -50,18 +50,149 @@
         animation: move-stars 200s linear infinite;
       }
 
-      @keyframes pulse-heart {
+      @keyframes pulse-gift {
         0%, 100% {
           transform: scale(1);
-          box-shadow: 0 0 0 0 rgba(244, 114, 182, 0.4);
+          box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.4);
         }
         50% {
           transform: scale(1.05);
-          box-shadow: 0 0 20px 10px rgba(244, 114, 182, 0);
+          box-shadow: 0 0 20px 10px rgba(251, 191, 36, 0);
         }
       }
-      .animate-pulse-heart {
-        animation: pulse-heart 2s infinite;
+      .animate-pulse-gift {
+        animation: pulse-gift 2s infinite;
+      }
+
+      .secret-card {
+        position: relative;
+        width: min(92vw, 680px);
+        padding: 2rem 1.25rem;
+      }
+
+      .secret-card::before,
+      .secret-card::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        border: 1px solid rgba(250, 204, 21, 0.16);
+        border-radius: 999px;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+      }
+
+      .secret-card::before {
+        width: min(76vw, 520px);
+        height: min(76vw, 520px);
+      }
+
+      .secret-card::after {
+        width: min(58vw, 360px);
+        height: min(58vw, 360px);
+        border-color: rgba(56, 189, 248, 0.14);
+      }
+
+      .secret-kicker,
+      .secret-code,
+      .opening-text {
+        color: rgba(250, 204, 21, 0.78);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+      }
+
+      .secret-warning {
+        margin: -0.6rem 0 1.25rem;
+        color: rgba(255, 255, 255, 0.68);
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        line-height: 1.5;
+      }
+
+      .secret-code {
+        display: flex;
+        gap: 0.65rem;
+        margin-bottom: 1.65rem;
+      }
+
+      .secret-code span {
+        display: block;
+        width: 0.55rem;
+        height: 0.55rem;
+        border-radius: 999px;
+        background: rgba(250, 204, 21, 0.66);
+        box-shadow: 0 0 12px rgba(250, 204, 21, 0.55);
+      }
+
+      .gift-button {
+        position: relative;
+        box-shadow: 0 0 0 1px rgba(250, 204, 21, 0.18), 0 24px 70px rgba(250, 204, 21, 0.12);
+      }
+
+      .gift-button::after {
+        content: "tap to unlock";
+        position: absolute;
+        left: 50%;
+        top: calc(100% + 0.9rem);
+        color: rgba(255, 255, 255, 0.52);
+        font-size: 0.66rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        transform: translateX(-50%);
+      }
+
+      .opening-orbit {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: min(72vw, 320px);
+        aspect-ratio: 1;
+      }
+
+      .opening-ring {
+        position: absolute;
+        inset: 0;
+        border: 1px solid rgba(250, 204, 21, 0.22);
+        border-top-color: rgba(56, 189, 248, 0.8);
+        border-radius: 999px;
+        animation: spin-orbit 1.4s linear infinite;
+      }
+
+      .opening-gift {
+        display: grid;
+        place-items: center;
+        width: 7.5rem;
+        aspect-ratio: 1;
+        border-radius: 999px;
+        color: #fef3c7;
+        background: rgba(251, 191, 36, 0.18);
+        border: 1px solid rgba(250, 204, 21, 0.5);
+        box-shadow: 0 0 46px rgba(250, 204, 21, 0.18);
+      }
+
+      .opening-text {
+        position: absolute;
+        bottom: 1.8rem;
+      }
+
+      .opening-hint {
+        position: absolute;
+        bottom: -0.75rem;
+        width: min(84vw, 22rem);
+        margin: 0;
+        color: rgba(255, 255, 255, 0.62);
+        font-size: 0.82rem;
+        font-weight: 700;
+        line-height: 1.45;
+      }
+
+      @keyframes spin-orbit {
+        to { transform: rotate(360deg); }
       }
       
       /* 3D Scene Styles */
@@ -69,6 +200,7 @@
         perspective: 250px;
         transform-style: preserve-3d;
         transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        z-index: 3;
       }
 
       @keyframes fly-in {
@@ -151,7 +283,7 @@
         will-change: transform, opacity;
       }
       
-      .fly-in-heart-element {
+      .fly-in-sparkle-element {
         position: absolute;
         transform-style: preserve-3d;
         animation-name: fly-in-pulse;
@@ -191,20 +323,20 @@
         color: #fff;
         text-shadow:
           0 0 4px #fff,
-          0 0 10px #f472b6,
-          0 0 20px #f472b6,
-          0 0 40px #f472b6,
-          0 0 60px #f472b6;
+          0 0 10px #facc15,
+          0 0 20px #38bdf8,
+          0 0 40px #a78bfa,
+          0 0 60px #a78bfa;
       }
 
       @keyframes pulse-glow {
         0%, 100% {
           transform: scale(1);
-          filter: brightness(1.1) drop-shadow(0 0 5px #f472b6);
+          filter: brightness(1.1) drop-shadow(0 0 5px #facc15);
         }
         50% {
           transform: scale(1.03);
-          filter: brightness(1.3) drop-shadow(0 0 15px #f9a8d4);
+          filter: brightness(1.3) drop-shadow(0 0 15px #38bdf8);
         }
       }
 
@@ -220,7 +352,7 @@
         background-image: linear-gradient(
           90deg,
           transparent 30%,
-          rgba(255, 255, 255, 0.8) 50%,
+          rgba(250, 204, 21, 0.9) 50%,
           transparent 70%
         );
         background-size: 200% 100%;
@@ -254,13 +386,243 @@
         left: 0;
         width: 100%;
         padding: 1rem;
+        display: flex;
+        justify-content: center;
+        gap: 0.9rem;
         text-align: center;
         color: rgba(255, 255, 255, 0.5);
         font-size: 0.875rem;
         letter-spacing: 0.1em;
+        text-transform: uppercase;
         text-shadow: 0 0 5px rgba(255,255,255,0.2);
         z-index: 10;
         pointer-events: none;
+      }
+
+      .galaxy-header strong {
+        color: rgba(250, 204, 21, 0.78);
+        font-weight: 700;
+      }
+
+      .reveal-card {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        z-index: 5;
+        width: min(88vw, 520px);
+        padding: 1.35rem 1.5rem 1.5rem;
+        border: 1px solid rgba(250, 204, 21, 0.18);
+        border-radius: 1.25rem;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+        box-shadow: 0 30px 100px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(18px);
+        text-align: center;
+        transform: translate(-50%, -50%);
+        animation: reveal-card 7.5s ease-in-out forwards;
+      }
+
+      .reveal-card p,
+      .reveal-card span {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.64);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
+      .reveal-card h1 {
+        margin: 0.35rem 0 0.5rem;
+        color: #fff;
+        font-family: 'Dancing Script', cursive;
+        font-size: clamp(3rem, 12vw, 5.8rem);
+        line-height: 0.9;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 28px rgba(250, 204, 21, 0.44);
+      }
+
+      @keyframes reveal-card {
+        0% { opacity: 0; transform: translate(-50%, -48%) scale(0.94); }
+        12%, 72% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        100% { opacity: 0; transform: translate(-50%, -52%) scale(1.04); }
+      }
+
+      .core-card {
+        position: fixed;
+        left: 50%;
+        top: 52%;
+        z-index: 6;
+        width: min(88vw, 660px);
+        padding: clamp(1.25rem, 4vw, 2rem);
+        border: 1px solid rgba(250, 204, 21, 0.18);
+        border-radius: 1.35rem;
+        background:
+          radial-gradient(circle at top left, rgba(250, 204, 21, 0.12), transparent 42%),
+          linear-gradient(135deg, rgba(7, 12, 27, 0.78), rgba(11, 16, 34, 0.42));
+        box-shadow: 0 34px 110px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(20px);
+        text-align: left;
+        opacity: 0;
+        pointer-events: none;
+        transform: translate(-50%, -44%) scale(0.98);
+        animation: core-card 15s ease-in-out 51s forwards;
+      }
+
+      .core-badge {
+        position: absolute;
+        right: 1.1rem;
+        top: 1.1rem;
+        display: grid;
+        place-items: center;
+        width: 3.4rem;
+        aspect-ratio: 1;
+        border-radius: 999px;
+        color: #fef3c7;
+        border: 1px solid rgba(250, 204, 21, 0.34);
+        background: rgba(250, 204, 21, 0.12);
+        font-family: 'Dancing Script', cursive;
+        font-size: 2rem;
+        box-shadow: 0 0 28px rgba(250, 204, 21, 0.16);
+      }
+
+      .core-kicker {
+        margin: 0 4.2rem 0.65rem 0;
+        color: rgba(250, 204, 21, 0.76);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+      }
+
+      .core-card h2 {
+        margin: 0 4.2rem 0.8rem 0;
+        color: #fff;
+        font-family: 'Dancing Script', cursive;
+        font-size: clamp(2.8rem, 8vw, 5.8rem);
+        line-height: 0.9;
+        text-shadow: 0 0 24px rgba(250, 204, 21, 0.34);
+      }
+
+      .core-copy {
+        max-width: 38rem;
+        margin: 0 0 1.15rem;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: clamp(0.98rem, 2vw, 1.16rem);
+        line-height: 1.8;
+      }
+
+      .core-wishes {
+        display: grid;
+        gap: 0.65rem;
+      }
+
+      .core-wishes span {
+        display: block;
+        padding: 0.78rem 0.9rem;
+        border-left: 2px solid rgba(250, 204, 21, 0.54);
+        color: rgba(255, 255, 255, 0.78);
+        background: rgba(255, 255, 255, 0.04);
+        line-height: 1.55;
+      }
+
+      @keyframes core-card {
+        0% { opacity: 0; transform: translate(-50%, -42%) scale(0.98); }
+        8%, 88% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        100% { opacity: 0; transform: translate(-50%, -54%) scale(1.02); }
+      }
+
+      .final-card {
+        position: relative;
+        width: min(90vw, 720px);
+        padding: clamp(1.5rem, 4vw, 2.5rem);
+        border: 1px solid rgba(250, 204, 21, 0.16);
+        border-radius: 1.4rem;
+        background:
+          radial-gradient(circle at center top, rgba(250, 204, 21, 0.12), transparent 44%),
+          rgba(4, 8, 18, 0.46);
+        box-shadow: 0 34px 120px rgba(0, 0, 0, 0.34);
+        backdrop-filter: blur(18px);
+      }
+
+      .final-kicker {
+        margin: 0 0 0.8rem;
+        color: rgba(250, 204, 21, 0.74);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+      }
+
+      .final-card h2 {
+        margin: 0 0 0.9rem;
+        color: #fff;
+        font-family: 'Dancing Script', cursive;
+        font-size: clamp(2.7rem, 8vw, 5.6rem);
+        line-height: 0.9;
+        text-shadow: 0 0 26px rgba(250, 204, 21, 0.34);
+      }
+
+      .final-message {
+        max-width: 38rem;
+        margin: 0 auto 1rem;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: clamp(1rem, 2vw, 1.18rem);
+        line-height: 1.8;
+      }
+
+      .final-signature {
+        max-width: 34rem;
+        margin: 0 auto 1.8rem;
+        color: rgba(250, 204, 21, 0.88);
+        font-size: clamp(0.98rem, 2vw, 1.12rem);
+        font-weight: 700;
+        line-height: 1.6;
+      }
+
+      @media (max-width: 640px) {
+        .galaxy-header {
+          flex-direction: column;
+          gap: 0.2rem;
+          font-size: 0.68rem;
+          line-height: 1.35;
+        }
+
+        .secret-card {
+          padding: 1.5rem 0.5rem;
+        }
+
+        .reveal-card {
+          top: 48%;
+          padding: 1.2rem 1rem;
+        }
+
+        .core-card {
+          top: 52%;
+          width: min(91vw, 360px);
+          padding: 1.15rem;
+        }
+
+        .core-badge {
+          width: 2.8rem;
+          font-size: 1.65rem;
+        }
+
+        .core-kicker,
+        .core-card h2 {
+          margin-right: 3.5rem;
+        }
+
+        .core-wishes {
+          gap: 0.5rem;
+        }
+
+        .core-wishes span {
+          padding: 0.62rem 0.72rem;
+          font-size: 0.82rem;
+        }
+
+        .final-card {
+          padding: 1.35rem 1rem;
+        }
       }
     </style>
   <script type="importmap">
