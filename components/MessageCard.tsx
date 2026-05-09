@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 
-const ITEM_COUNT = 16; 
+const ITEM_COUNT = 16;
+const MOBILE_ITEM_COUNT = 8;
 const MESSAGES = [
     "Chapter 23",
     "10 Mei 2026",
@@ -21,13 +22,14 @@ const CONFETTI_COLORS = [
 
 const BirthdayMessages: React.FC = () => {
     const items = useMemo(() => {
+        const itemCount = window.matchMedia('(max-width: 640px)').matches ? MOBILE_ITEM_COUNT : ITEM_COUNT;
         const positions = [];
         const GRID_COLS = 5;
         const GRID_ROWS = 5;
         const cellWidth = 100 / GRID_COLS;
         const cellHeight = 100 / GRID_ROWS;
 
-        for (let i = 0; i < ITEM_COUNT; i++) {
+        for (let i = 0; i < itemCount; i++) {
             const col = i % GRID_COLS;
             const row = Math.floor(i / GRID_COLS);
             positions.push({
@@ -41,7 +43,7 @@ const BirthdayMessages: React.FC = () => {
             [positions[i], positions[j]] = [positions[j], positions[i]];
         }
         
-        return Array.from({ length: ITEM_COUNT }).map((_, i) => {
+        return Array.from({ length: itemCount }).map((_, i) => {
             const position = positions[i];
             const itemType = Math.random();
             const style: React.CSSProperties = {
@@ -75,7 +77,7 @@ const BirthdayMessages: React.FC = () => {
                 return (
                     <div key={`sparkle-${i}`} className={`fly-in-sparkle-element ${confettiColor}`} style={{...style, fontSize: `${Math.random() * 20 + 20}px`}}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="w-[1em] h-[1em]" viewBox="0 0 24 24" fill="currentColor"
-                             style={{ filter: 'drop-shadow(0 0 5px #facc15) drop-shadow(0 0 15px #38bdf8)' }}>
+                             style={{ filter: 'drop-shadow(0 0 4px #facc15)' }}>
                             <path d="M12 2 14.7 8.8 22 12l-7.3 3.2L12 22l-2.7-6.8L2 12l7.3-3.2L12 2Z" />
                         </svg>
                     </div>
@@ -87,8 +89,8 @@ const BirthdayMessages: React.FC = () => {
                        <div className="rounded-full bg-white" style={{
                            width: `${size}px`,
                            height: `${size}px`,
-                           filter: 'blur(3px) brightness(1.5)',
-                           boxShadow: '0 0 8px 2px #fff, 0 0 12px 4px #f0abfc, 0 0 20px 6px #a855f7',
+                           filter: 'blur(2px) brightness(1.35)',
+                           boxShadow: '0 0 8px 2px #fff, 0 0 14px 4px #a855f7',
                            opacity: Math.random() * 0.5 + 0.5,
                        }}></div>
                     </div>

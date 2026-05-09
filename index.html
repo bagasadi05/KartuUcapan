@@ -579,6 +579,37 @@
       }
 
       @media (max-width: 640px) {
+        .nebula-bg,
+        .star-bg {
+          animation: none;
+        }
+
+        .star-bg {
+          transform: none !important;
+        }
+
+        .perspective-container {
+          transform: none !important;
+          perspective: none;
+        }
+
+        .neon-text {
+          text-shadow:
+            0 0 4px #fff,
+            0 0 10px rgba(250, 204, 21, 0.65);
+        }
+
+        .animate-pulse-glow {
+          animation: none;
+        }
+
+        .reveal-card,
+        .core-card,
+        .final-card,
+        .secondary-link {
+          backdrop-filter: none;
+        }
+
         .galaxy-header {
           flex-direction: column;
           gap: 0.2rem;

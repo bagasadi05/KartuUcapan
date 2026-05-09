@@ -51,14 +51,10 @@ const App: React.FC = () => {
   const openingTimer = useRef<number | null>(null);
 
   useEffect(() => {
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'audio';
-    link.href = SONG_AUDIO_URL;
-    document.head.appendChild(link);
     return () => {
-      document.head.removeChild(link);
       if (openingTimer.current) clearTimeout(openingTimer.current);
+      if (inactivityTimer.current) clearTimeout(inactivityTimer.current);
+      if (fadeRAF.current) cancelAnimationFrame(fadeRAF.current);
     };
   }, []);
 
@@ -185,10 +181,8 @@ const App: React.FC = () => {
         handleInteraction();
     };
     
-    // Use gyroscope on mobile, mouse on desktop
-    if (window.DeviceOrientationEvent && 'ontouchstart' in window) {
-        window.addEventListener('deviceorientation', handleDeviceOrientation);
-    } else {
+    const useFinePointer = window.matchMedia('(pointer: fine)').matches;
+    if (useFinePointer) {
         mainRef.current?.addEventListener('mousemove', handleMouseMove);
     }
     
@@ -348,7 +342,7 @@ const App: React.FC = () => {
       <audio
         ref={audioRef}
         src={SONG_AUDIO_URL}
-        preload="auto"
+        preload="metadata"
         playsInline
         loop
         crossOrigin="anonymous"
